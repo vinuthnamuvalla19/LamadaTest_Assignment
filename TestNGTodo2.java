@@ -43,7 +43,7 @@ public class TestNGTodo2 {
 
     @Test
     public void basicTest() throws InterruptedException {
-        String spanText;
+         String spanText;
         System.out.println("Loading Url");
 
         driver.get("https://www.lambdatest.com/automation-demos/");
@@ -71,7 +71,7 @@ public class TestNGTodo2 {
 	driver.findElement(By.id("discounts")).click();
 	driver.findElement(By.id("others")).click();
 	
-	System.out.println("DroupDown");
+	System.out.println("DropDown");
 	WebElement payment = driver.findElement(By.id("preferred-payment"));
 	Select roles = new Select(payment);
 	roles.selectByVisibleText("Credit or Debit card");
@@ -80,12 +80,31 @@ public class TestNGTodo2 {
 	driver.findElement(By.id("tried-ecom")).click();
 	
 	driver.findElement(By.id("comments")).sendKeys("All Cool");
+	
+	((JavascriptExecutor)driver).executeScript("window.open()");
+    	ArrayList<String> tabs1 = new ArrayList<String>(driver.getWindowHandles());
+    	driver.switchTo().window(tabs1.get(1));
+    
+	driver.get("https://www.lambdatest.com/selenium-automation");
+	Thread.sleep(2000);
+	Actions action1 =new Actions(driver);
+	WebElement Image = driver.findElement(By.xpath("//*[@id=\"__next\"]/div[1]/section[8]/div/div/div/div[1]/div[1]/a/img"));
+	action1.contextClick(Image).build().perform();
+	Thread.sleep(2000);
+	action1.sendKeys(Keys.CONTROL, "s").build().perform();
+	System.out.println("image downloded");
+	Thread.sleep(2000);
+	//driver.close();
+	driver.switchTo().window(tabs1.get(0));
 
+	Thread.sleep(2000);
+	
+	//driver.findElement(By.id("img")).click();
+	
 	System.out.println("click on submit");
 	driver.findElement(By.id("submit-button")).click();
-
+	Thread.sleep(3000);
         System.out.println("TestFinished");
-
     }
 
     @AfterMethod
